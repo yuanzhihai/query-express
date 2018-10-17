@@ -20,7 +20,7 @@ composer require yzh52521/think-query-express
 或者
 ###  三、autoload psr-4标准安装
 ```
-   a) 进入vendor/dh2y目录 (没有dh2y目录 mkdir dh2y)
+   a) 进入vendor/yzh52521目录 (没有yzh52521目录 mkdir yzh52521)
    b) git clone 
    c) 修改 git clone下来的项目名称为think-query-express
    d) 添加下面配置
