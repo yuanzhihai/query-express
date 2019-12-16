@@ -1,5 +1,5 @@
 # think-query-express
-The Think5.1 query-express
+The Think5.x/Think6.x query-express
 快递查询 SDK
 ## 安装
 
