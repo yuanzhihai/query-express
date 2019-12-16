@@ -1,25 +1,35 @@
 {
   "name": "yzh52521/think-query-express",
-  "description": "query-express for think5.1",
+  "description": "query-express for think5.*/think6.*",
   "homepage": "https://github.com/yzh52521/think-query-express",
-  "license": "MIT",
-  "minimum-stability": "stable",
   "version": "1.0",
+  "type": "library",
+  "license": "Apache-2.0",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "yzh52521",
-      "email": "396751927@qq.com"
+      "email": "yzh52521@gmail.com"
     }
   ],
   "support": {
     "issues": "https://github.com/yzh52521/think-query-express/issues"
   },
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=7.1.0",
+    "ext-json": "*",
+    "ext-curl": "*"
   },
   "autoload": {
     "psr-4": {
       "yzh52521\\query\\express\\": "src/"
+    }
+  },
+  "extra": {
+    "think": {
+      "config": {
+        "express": "config/express.php"
+      }
     }
   }
 }

@@ -8,6 +8,7 @@
 namespace yzh52521\query\express;
 
 
+use InvalidArgumentException;
 use think\facade\Config;
 
 class QueryExpress
@@ -46,7 +47,7 @@ class QueryExpress
      * QueryExpress constructor.
      * @param array $express
      */
-    private function __construct($express = array())
+    private function __construct($express = [])
     {
         if (empty($express) && $config = Config::get('express')) {
             $express = $config;
@@ -60,7 +61,7 @@ class QueryExpress
      * @param array $config
      * @return QueryExpress|null
      */
-    public static function getInstance($config = array())
+    public static function getInstance($config = [])
     {
         if (empty(self::$instance)) {
             self::$instance = new self($config);
@@ -108,19 +109,19 @@ class QueryExpress
 
     /**
      * 获取快递公司
-     * @param  string $num 快递单号
+     * @param string $num 快递单号
      * @return array|bool
      */
     public function getType($num)
     {
         $request = $this->type_url . $num;
-        $result = $this->http('get',$request);
-        $result = json_decode($result, JSON_OBJECT_AS_ARRAY);
+        $result  = $this->http('get', $request);
+        $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
 
         $return = [];
         if (isset($result['auto'][0])) {
             $return['type'] = $result['auto'][0]['comCode'];
-            $return['num'] = $num;
+            $return['num']  = $num;
             $return['name'] = isset($this->express[$return['type']]) ? $this->express[$return['type']] : $return['type'];
         }
         return count($return) > 0 ? $return : false;
@@ -129,14 +130,14 @@ class QueryExpress
     /**
      * 获取快递公司代码
      *
-     * @param  string $num 快递单号
+     * @param string $num 快递单号
      * @return string
      */
     public function getComCode($num)
     {
         $request = $this->type_url . $num;
-        $result = $this->http('get',$request);
-        $result = json_decode($result, JSON_OBJECT_AS_ARRAY);
+        $result  = $this->http('get', $request);
+        $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
         $comCode = '';
         if (isset($result['auto'][0])) {
             $comCode = $result['auto'][0]['comCode'];
@@ -152,16 +153,16 @@ class QueryExpress
      */
     public function details($num)
     {
-        $type = $this->getComCode($num);
+        $type    = $this->getComCode($num);
         $request = $this->query_url . "type=$type&postid=$num";
-        $result = $this->http('get',$request);
-        $result = json_decode($result, JSON_OBJECT_AS_ARRAY);
-        $detail = [];
+        $result  = $this->http('get', $request);
+        $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
+        $detail  = [];
         if ($result['status'] == 200) {
-            $detail['data'] = $result['data'];
-            $detail['type'] = $result['com'];
-            $detail['name'] = isset($this->express[$result['com']]) ? $this->express[$result['com']] : $result['com'];
-            $detail['num'] = $result['nu'];
+            $detail['data']  = $result['data'];
+            $detail['type']  = $result['com'];
+            $detail['name']  = isset($this->express[$result['com']]) ? $this->express[$result['com']] : $result['com'];
+            $detail['num']   = $result['nu'];
             $detail['state'] = $result['state'];
             switch ($result['state']) {
                 case 0:
@@ -198,11 +199,11 @@ class QueryExpress
      */
     public function getState($num)
     {
-        $type = $this->getComCode($num);
+        $type    = $this->getComCode($num);
         $request = $this->query_url . "type=$type&postid=$num";
-        $result = $this->http('get',$request);
-        $result = json_decode($result, JSON_OBJECT_AS_ARRAY);
-        $status = ['state' => null, 'ret' => ''];
+        $result  = $this->http('get', $request);
+        $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
+        $status  = ['state' => null, 'ret' => ''];
         if ($result['status'] == 200) {
             switch ($result['state']) {
                 case 0:
