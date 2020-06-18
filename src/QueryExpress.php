@@ -122,7 +122,7 @@ class QueryExpress
         if (isset($result['auto'][0])) {
             $return['type'] = $result['auto'][0]['comCode'];
             $return['num']  = $num;
-            $return['name'] = isset($this->express[$return['type']]) ? $this->express[$return['type']] : $return['type'];
+            $return['name'] = $this->express[$return['type']] ?? $return['type'];
         }
         return count($return) > 0 ? $return : false;
     }
@@ -158,10 +158,10 @@ class QueryExpress
         $result  = $this->http('get', $request);
         $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
         $detail  = [];
-        if ($result['status'] == 200) {
+        if ($result['status'] === 200) {
             $detail['data']  = $result['data'];
             $detail['type']  = $result['com'];
-            $detail['name']  = isset($this->express[$result['com']]) ? $this->express[$result['com']] : $result['com'];
+            $detail['name']  = $this->express[$result['com']] ?? $result['com'];
             $detail['num']   = $result['nu'];
             $detail['state'] = $result['state'];
             switch ($result['state']) {
@@ -204,7 +204,7 @@ class QueryExpress
         $result  = $this->http('get', $request);
         $result  = json_decode($result, JSON_OBJECT_AS_ARRAY);
         $status  = ['state' => null, 'ret' => ''];
-        if ($result['status'] == 200) {
+        if ($result['status'] === 200) {
             switch ($result['state']) {
                 case 0:
                     $status['ret'] = '在途中';
@@ -243,7 +243,7 @@ class QueryExpress
         $curl = curl_init();
         // GET参数设置
         if (!empty($options['query'])) {
-            $url .= (stripos($url, '?') !== false ? '&' : '?') . http_build_query($options['query']);
+            $url .= (strpos($url, '?') !== false ? '&' : '?') . http_build_query($options['query']);
         }
         // CURL头信息设置
         if (!empty($options['headers'])) {
@@ -279,7 +279,7 @@ class QueryExpress
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         list($content, $status) = [curl_exec($curl), curl_getinfo($curl), curl_close($curl)];
-        return (intval($status["http_code"]) === 200) ? $content : false;
+        return ((int)$status["http_code"] === 200) ? $content : false;
     }
 
 }
