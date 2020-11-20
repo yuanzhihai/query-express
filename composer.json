@@ -1,35 +1,21 @@
 {
-  "name": "yzh52521/think-query-express",
-  "description": "query-express for think5.*/think6.*",
-  "homepage": "https://github.com/yzh52521/think-query-express",
-  "version": "1.0",
-  "type": "library",
-  "license": "Apache-2.0",
-  "minimum-stability": "dev",
-  "authors": [
-    {
-      "name": "yzh52521",
-      "email": "yzh52521@gmail.com"
-    }
-  ],
-  "support": {
-    "issues": "https://github.com/yzh52521/think-query-express/issues"
-  },
+  "name": "yzh52521/express",
+  "description": "基于百度查询快递信息",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.0",
     "ext-json": "*",
-    "ext-curl": "*"
+    "php-curl-class/php-curl-class": "~8.6.0"
   },
   "autoload": {
     "psr-4": {
-      "yzh52521\\query\\express\\": "src/"
+      "express\\" : "src/"
     }
   },
-  "extra": {
-    "think": {
-      "config": {
-        "express": "config/express.php"
-      }
+  "authors": [
+    {
+      "name": "yzh52521",
+      "email": "396751927@qq.com"
     }
-  }
+  ],
+  "minimum-stability": "stable"
 }

@@ -1,127 +1,69 @@
-# think-query-express
-The Think5.x/Think6.x query-express
-快递查询 SDK
-## 安装
+https://packagist.org/packages/yzh52521/express
 
-### 一、执行命令安装
+基于百度查询快递信息
+
+```php
+use express\Express;
+$number = 'xxxxxxxxxxxx';
+$res = Express::searchExpress($number);
+Array
+(
+    [status] => 1
+    [com] => yunda
+    [state] => 3
+    [send_time] => 
+    [departure_city] => 
+    [arrival_city] => 
+    [latest_progress] => 
+    [context] => Array
+        (
+            [0] => Array
+                (
+                    [time] => 1558745289
+                    [desc] => 【合肥市】快件已被 ***（合作驿站） 代签收。如有问题请电联业务员：***【138***617】。相逢是缘,如果您对我的服务感到满意,给个五星好不好？【请在评价小件员处给予五星好评】
+                )
+            [1] => Array
+                (
+                    [time] => 1558742679
+                    [desc] => 【合肥市】安徽合肥政务区公司绿怡居寄存点 派件员 *** 138***617 正在为您派件
+                )
+            [2] => Array
+                (
+                    [time] => 1558716786
+                    [desc] => 【合肥市】已离开 安徽合肥分拨中心；发往 安徽合肥政务区公司
+                )
+            [3] => Array
+                (
+                    [time] => 1558716768
+                    [desc] => 【合肥市】已到达 安徽合肥分拨中心
+                )
+            [4] => Array
+                (
+                    [time] => 1558715428
+                    [desc] => 【合肥市】已到达 安徽合肥分拨中心
+                )
+            [5] => Array
+                (
+                    [time] => 1558642569
+                    [desc] => 【泉州市】已离开 福建晋江分拨中心；发往 安徽合肥分拨中心
+                )
+            [6] => Array
+                (
+                    [time] => 1558642466
+                    [desc] => 【泉州市】已到达 福建晋江分拨中心
+                )
+            [7] => Array
+                (
+                    [time] => 1558620838
+                    [desc] => 【漳州市】已离开 福建漳州公司；发往 安徽合肥网点包
+                )
+            [8] => Array
+                (
+                    [time] => 1558614043
+                    [desc] => 【漳州市】福建漳州公司 已揽收
+                )
+        )
+    [_source_com] => yunda
+    [_support_from] => partner
+)
 ```
-composer require yzh52521/think-query-express
-```
-
-或者
-
-### 二、require安装
-```
-"require": {
-        "yzh52521/think-query-express":"*"
-},
-```
-
-或者
-###  三、autoload psr-4标准安装
-```
-   a) 进入vendor/yzh52521目录 (没有yzh52521目录 mkdir yzh52521)
-   b) git clone 
-   c) 修改 git clone下来的项目名称为think-query-express
-   d) 添加下面配置
-   "autoload": {
-        "psr-4": {
-            "yzh52521\\query\\express\\": "vendor/yzh52521/think-query-express/src"
-        }
-    },
-    e) php composer.phar update
-```
-
-
-## 使用
-#### 添加配置文件（非必须）
-```
- 将config/express.php 复制到配置目录里面即可
- 
- 1、如果获取快递公司是编码，请在配置里面添加编码对应的快递贵公司
- 
-```
-
-#### 使用方法
-
-   ###### 1-1、获取快递公司信息
-   
-   ```
-    $num = 'XXXXXXXX';
-    $Query = QueryExpress::getInstance();
-    
-    $express = $Query->getType($num);
-    
-    
-   ```
-   ###### 1-2、获取快递公司信息返回信息
-    
-   ```
-    array(3) {
-      ["type"] => string(8) "shentong"
-      ["num"] => int(221401186231)
-      ["name"] => string(12) "申通快递"
-    }
-   ```
-    
-   ###### 2-1、获取快递信息详情
-      
-   ```
-        $num = 'XXXXXXXX';
-        $Query = QueryExpress::getInstance();
-        
-        $express = $Query->details($num);
-        
-     
-   ```
-   ###### 2-2、获取快递信息返回信息
-   >state 0：在途中,1：已发货，2：疑难件，3： 已签收 ，4：已退货。
-        
-   ```
-       array(6) {
-         ["data"] => array(16) {
-           [0] => array(4) {
-             ["time"] => string(19) "2018-09-27 07:52:40"
-             ["ftime"] => string(19) "2018-09-27 07:52:40"
-             ["context"] => string(50) "陕西镇坪县公司-已发往-陕西安康公司"
-             ["location"] => string(0) ""
-           }
-           [1] => array(4) {
-             ["time"] => string(19) "2018-09-26 20:19:12"
-             ["ftime"] => string(19) "2018-09-26 20:19:12"
-             ["context"] => string(79) "陕西镇坪县公司-陕西镇坪县公司(15591577188,0915-8287888)-已收件"
-             ["location"] => string(0) ""
-           }
-         }
-         ["type"] => string(8) "shentong"
-         ["name"] => string(12) "申通快递"
-         ["num"] => string(12) "221401186231"
-         ["state"] => string(1) "3"
-         ["ret"] => string(9) "已签收"
-       }
-   ```
- ###### 3-1、获取快递状态
-   
-   ```
-    $num = 'XXXXXXXX';
-    $Query = QueryExpress::getInstance();
-    
-    $express = $Query->getState($num);
-    
-    
-   ```
-   ###### 3-2、获取快递状态返回信息
-    
-   ```
-    array(2) {
-      ["state"] => string(1) "3"
-      ["ret"] => string(9) "已签收"
-    }
-   ```
-    
-    
-
-     
-
-
-
