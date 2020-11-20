@@ -1,9 +1,9 @@
 <?php
 /**
- * express
+ * think-query-express
  *
  * @author    yzh52521
- * @link      https://github.com/yzh52521/express
+ * @link      https://github.com/yzh52521/think-query-express
  * @copyright 2020 yzh52521 all rights reserved.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */

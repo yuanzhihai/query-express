@@ -1,4 +1,4 @@
-https://packagist.org/packages/yzh52521/express
+https://packagist.org/packages/yzh52521/think-query-express
 
 基于百度查询快递信息
 

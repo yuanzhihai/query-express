@@ -1,5 +1,5 @@
 {
-  "name": "yzh52521/express",
+  "name": "yzh52521/think-query-express",
   "description": "基于百度查询快递信息",
   "require": {
     "php": ">=7.0",
