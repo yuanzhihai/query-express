@@ -1,6 +1,6 @@
 <?php
 /**
- * think-query-express
+ * query-express
  *
  * @author    yzh52521
  * @link      https://github.com/yzh52521/think-query-express
