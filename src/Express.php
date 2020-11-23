@@ -162,6 +162,7 @@ class Express
             'jialidatong'            => '嘉里大通',
             'jykd'                   => '晋越快递',
             'jd'                     => '京东快递',
+            'jtexpress'              => '极兔速递',
             'kuaijiesudi'            => '快捷速递',
             'lianb'                  => '联邦快递（国内）',
             'lianhaowuliu'           => '联昊通物流',
